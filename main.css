@@ -9,3 +9,156 @@
     box-sizing: border-box;
     font-family: 'Rubik', sans-serif;
 }
+body{
+    background: hsl(228, 33%, 97%);
+}
+/* ---------------Section--------------- */
+.container{
+    width: 100%;
+    padding-top: 3rem;
+}
+
+/* ---------------CONTENT--------------- */
+.content{
+    width: 50%;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+/* ---------------MESSAGE-CONTENT--------------- */
+
+.msg-content{
+    width: 100%;
+    background: hsl(0, 0%, 100%);
+    padding: 1.9rem;
+    border-radius: 15px;
+    margin-top: 1rem;
+}
+.comment-sec{
+    display: flex;
+}
+.rating-sec{
+    padding:  .5rem;
+    background: hsl(223, 19%, 93%);
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    height: 5.5rem;
+    border-radius: 5px;
+    margin-right: 1.4rem;
+}
+.rating-sec .rating{
+    color:  hsl(238, 40%, 52%);
+    font-weight: bold;
+}
+.plus, .minus{
+    cursor: pointer;
+}
+.profile{
+    display: flex;
+    align-items: center;
+    margin-bottom: .4rem;
+}
+.profile .comment-pic{
+    display: block;
+    text-align: left;
+    width: 2.5rem;
+}
+.comment-pic img{
+    width: 100%;
+}
+.profile .user-name{
+    font-weight: bold;
+    margin-right: .7rem;
+    margin-left: .7rem;
+    color:  hsl(212, 24%, 26%);
+}
+.profile .date-posted{
+    margin-left: .5rem;
+    color:hsl(211, 10%, 45%)
+}
+.profile .reply{
+    margin-left: auto;
+    cursor: pointer;
+    color:  hsl(238, 40%, 52%);
+    transition: .4s;
+}
+.profile .reply:hover{
+    color: hsl(239, 57%, 85%);
+}
+.reply .reply-text{
+    padding-left: .4rem;
+    font-weight: bold;
+}
+.comment-text-div .comment-text{
+    color:hsl(211, 10%, 45%);
+}
+
+
+/* ---------------REPLY-CONTENT-------POST COMMENT-------- */
+.reply-content{
+    width: 100%;
+    background: hsl(0, 0%, 100%);
+    padding: 1.3rem;
+    border-radius: 15px;
+    margin-left: auto;
+    margin-right: auto;
+    margin-top: .5rem;
+    display: flex;
+    text-align:start;
+    justify-content: space-between;
+}
+.reply-pic {
+    width: 2rem;
+}
+.reply-pic img{
+    display: block;
+    width: 100%;
+}
+.reply-text textarea{
+    width: 100%;
+    resize: none;
+    width: 31rem;
+    padding: 1rem;
+}
+.reply-btn-container .reply-btn{
+    padding: .4rem 1.2rem;
+    background: hsl(238, 40%, 52%);
+    border: 0;
+    color:  hsl(0, 0%, 100%);
+    transition: .4s;
+    border-radius: 5px;
+}
+.reply-btn-container .reply-btn:hover{
+    background: hsl(239, 57%, 85%);
+}
+
+/* ---------------POSTED-REPLY--------------- */
+.msg-content.posted-reply{
+    width:90% ;
+    align-items: end;
+    /* margin-left: unset; */
+    /* margin-right: unset; */
+
+}
+
+
+/* ---------------POST-CONTENT--------------- */
+.post{
+    margin-bottom: 1rem;
+}
+.reply-text textarea.post-txt-area{
+    width: 100%;
+    resize: none;
+    width: 31rem;
+    padding: .7rem;
+    height: 5rem;
+}
+
+
+/* 
+    -make the mini comment go right
+    -make another div for all the mini comment and add left border
+    - start the functionalities
+*/

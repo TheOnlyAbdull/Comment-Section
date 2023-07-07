@@ -18,11 +18,11 @@ The designs were created to the following widths:
 
 ### Neutral
 
-- Dark blue: hsl(212, 24%, 26%)
+- Dark blue: hsl(212, 24%, 26%) --text
 - Grayish Blue: hsl(211, 10%, 45%)
-- Light gray: hsl(223, 19%, 93%)
-- Very light gray: hsl(228, 33%, 97%)
-- White: hsl(0, 0%, 100%)
+- Light gray: hsl(223, 19%, 93%) -- score
+- Very light gray: hsl(228, 33%, 97%) --body
+- White: hsl(0, 0%, 100%) --comment bg
 
 ## Typography
 

@@ -22,6 +22,7 @@
 
 
 ## 1. Introduction
+The comment section app is an interactive app, where users can post comment, delete comment, reply comment and also rate comment
 
 
 ## 2. Getting Started
