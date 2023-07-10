@@ -20,7 +20,7 @@ body{
 
 /* ---------------CONTENT--------------- */
 .content{
-    width: 50%;
+    width: 55%;
     margin-left: auto;
     margin-right: auto;
 }
@@ -30,8 +30,8 @@ body{
 .msg-content{
     width: 100%;
     background: hsl(0, 0%, 100%);
-    padding: 1.9rem;
-    border-radius: 15px;
+    padding: 1.8rem;
+    border-radius: 12px;
     margin-top: 1rem;
 }
 .comment-sec{
@@ -87,12 +87,13 @@ body{
 .profile .reply:hover{
     color: hsl(239, 57%, 85%);
 }
-.reply .reply-text{
+.reply-text{
     padding-left: .4rem;
     font-weight: bold;
 }
 .comment-text-div .comment-text{
     color:hsl(211, 10%, 45%);
+    line-height: 1.3;
 }
 
 
@@ -116,49 +117,121 @@ body{
     display: block;
     width: 100%;
 }
+.reply-text{
+    width: 75%;
+}
 .reply-text textarea{
-    width: 100%;
     resize: none;
-    width: 31rem;
-    padding: 1rem;
+    width: 100%;
+    padding: .5rem;
+    height: 4rem;
 }
 .reply-btn-container .reply-btn{
-    padding: .4rem 1.2rem;
+    padding: .8rem 1.5rem;
     background: hsl(238, 40%, 52%);
     border: 0;
     color:  hsl(0, 0%, 100%);
     transition: .4s;
     border-radius: 5px;
+    margin-left: 1rem;
 }
 .reply-btn-container .reply-btn:hover{
     background: hsl(239, 57%, 85%);
 }
 
 /* ---------------POSTED-REPLY--------------- */
+.posted-reply-container{
+    width: 100%;
+    /* border-left: 2px solid hsl(211, 10%, 45%); */
+}
 .msg-content.posted-reply{
     width:90% ;
-    align-items: end;
-    /* margin-left: unset; */
-    /* margin-right: unset; */
-
+    margin-left: auto;
 }
 
+/* Users posted reply */
+
+.user-tag{
+    font-size: 12px;
+    background: hsl(238, 40%, 52%);
+    color:  hsl(0, 0%, 100%);
+    padding: 3px;
+    margin-right: .3rem;
+}
+.del-ed{
+    margin-left: auto;
+    display: flex;
+}
+.del-ed .edit{
+    color:  hsl(238, 40%, 52%);
+    cursor: pointer;
+    transition: .4s;
+}
+.del-ed .delete{
+    margin-right: 1rem;
+    color:hsl(358, 79%, 66%) ;
+    cursor: pointer;
+    transition: .4s;
+}
+.del-ed .edit:hover{
+    color: hsl(239, 57%, 85%);
+}
+.del-ed .delete:hover{
+    color: hsl(357, 100%, 86%);
+}
 
 /* ---------------POST-CONTENT--------------- */
 .post{
     margin-bottom: 1rem;
 }
 .reply-text textarea.post-txt-area{
-    width: 100%;
     resize: none;
-    width: 31rem;
     padding: .7rem;
     height: 5rem;
 }
 
 
-/* 
-    -make the mini comment go right
-    -make another div for all the mini comment and add left border
-    - start the functionalities
-*/
+
+
+
+
+
+
+
+
+
+/* ---------------700px--------------- */
+@media screen and (max-width:700px){
+    .content{
+        width: 90%;
+    }
+    /* reply should come down 
+    - use position absolute
+    -and position it to the down of the page
+    */
+    
+    /* rating should come down 
+    -use position absolute
+    -and make use of flex direction
+    */
+}
+
+
+
+
+
+
+
+/* ---------------1000px--------------- */
+@media screen and (max-width:1000px){
+    .content{
+        width: 70%;
+    }
+}
+
+/* ---------------900px--------------- */
+@media screen and (max-width:900px){
+    .content{
+        width: 80%;
+    }
+}
