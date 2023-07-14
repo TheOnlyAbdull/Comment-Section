@@ -31,9 +31,9 @@ body{
 .msg-content{
     width: 100%;
     background: hsl(0, 0%, 100%);
-    padding: 1.8rem;
+    padding: 1.7rem;
     border-radius: 12px;
-    margin-top: 1rem;
+    margin-top: .5rem;
 }
 .comment-sec{
     display: flex;
@@ -213,7 +213,7 @@ body{
     display: flex;
     align-items: center;
     justify-content: center;
-    /* display: none;toggle argument */
+    display: none;/*toggle argument*/
     background:hsla(0, 0%, 0%, 0.404);
 }
 .modal-container{

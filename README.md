@@ -34,3 +34,20 @@ To use the ToDo List App, you need the following:
 ### Installation
 1. Download the source code from the GitHub repository.
 2. Extract the downloaded file to a desired location on your computer.
+
+## 3. Usage
+### Feature
+- User are able no able to delete post or comment that are not written by them
+- 
+
+### Screenshot
+-(screenshot)[./]
+
+## 4. Structure and design
+### HTML Structure
+### CSS Styling
+
+## 5. JavaScript Functionalities
+## Populate on Load
+The page structure is being populated on load with this function and previous states are being stored
+-
