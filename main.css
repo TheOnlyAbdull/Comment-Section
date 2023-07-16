@@ -81,6 +81,7 @@ body{
 }
 .profile .date-posted{
     margin-left: .5rem;
+    margin-right: 2rem;
     color:hsl(211, 10%, 45%)
 }
 .profile .reply{
@@ -191,8 +192,15 @@ body{
 }
 
 /* ---------------POST-CONTENT--------------- */
+.post-comment-container{
+    width: 100;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
 .post{
     margin-bottom: 1rem;
+    width: 50%;
 }
 .reply-text textarea.post-txt-area{
     resize: none;
@@ -256,30 +264,16 @@ body{
 
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 /* ---------------1000px--------------- */
 @media screen and (max-width:1000px) and (min-width:900px) {
-    .content{
+    .content,.post{
         width: 70%;
     }
 }
 
 /* ---------------900px--------------- */
 @media screen and (max-width:900px) and (min-width:700px){
-    .content{
+    .content,.post{
         width: 80%;
     }
 }
@@ -287,7 +281,7 @@ body{
 
 /* ---------------700px--------------- */
 @media screen and (max-width:700px){
-    .content{
+    .content, .post{
         width: 95%;
     }
     .msg-content.posted-reply{
