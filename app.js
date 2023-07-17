@@ -1,49 +1,47 @@
 /* TODO :
 1-populate the ui ON LOAD*/
 
-
 // ------------Selcting DOM Element---------------
-const mainContainer = document.querySelector('.content');
-const replyBtns = document.querySelectorAll('.reply');
-const sendBtn = document.getElementById('send');
-const commentTxt = document.getElementById('sendMsg');
-
+const mainContainer = document.querySelector(".content");
+const replyBtns = document.querySelectorAll(".reply");
+const sendBtn = document.getElementById("send");
+const commentTxt = document.getElementById("sendMsg");
+const activeModal = document.querySelector(".modal-overlay");
+const deleteModal = document.querySelector('.delete');
+const cancelModal = document.querySelector('.cancel');
 
 // ----------------All Functions------------------
 
-
 // Load page func
-const pageLoads = ()=>{
-    //display comment
-    const value = JSON.parse(localStorage.getItem('value'))
-    if (value) {
-        console.log(value);
-    }
-    
-}
+const pageLoads = () => {
+  //display comment
+  const value = JSON.parse(localStorage.getItem("value"));
+  if (value) {
+    console.log(value);
+  }
+};
 
-const clickedSend = ()=>{
-    const commentValue = sendMsg.value;
-    // console.log(sendMsg.value);
+const clickedSend = () => {
+  const commentValue = sendMsg.value;
+  // console.log(sendMsg.value);
 
-    //if a value is inputed
-    if (commentValue) {
+  //if a value is inputed
+  if (commentValue) {
 
-        //save comment to local storage
-        localStorage.setItem('value', JSON.stringify(commentValue));
-        console.log(`fuck it worked`); 
+    //save comment to local storage
+    // localStorage.setItem('value', JSON.stringify(commentValue));
+    console.log(`fuck it worked`);
 
-        
-        //getting user details from local storage
-        const userName = 'Abdullah';
-        // const userPic = localStorage.getItem(JSON.parse('userStoredPic'));
-        
-        //creating new msg div and add class
-        const msgContentDiv = document.createElement('div');
-        msgContentDiv.classList.add('msg-content');
+    //getting user details from local storage
+    const userName = "Abdullah";
+    // const userPic = localStorage.getItem(JSON.parse('userStoredPic'));
 
-        //inserted all element and content
-            msgContentDiv.innerHTML = `<div class="comment-sec">
+    //creating new msg div and add class
+    const msgContentDiv = document.createElement("div");
+    msgContentDiv.classList.add("msg-content");
+
+    //inserted all element and content
+    msgContentDiv.innerHTML = `<div class="comment-sec">
             <div class="text-sec">
                 <div class="profile">
                     <div class="comment-pic"><img src="./images/avatars/image-maxblagun.png" alt="?"></div>
@@ -66,35 +64,47 @@ const clickedSend = ()=>{
                 <p class="rating">14</p>
                 <div class="minus"><img src="./images/icon-minus.svg" alt="-"></div>
             </div>
-        </div>`
-        mainContainer.appendChild(msgContentDiv);
+        </div>`;
+    mainContainer.appendChild(msgContentDiv);
 
-        //when deleted btn is clicked
-        const deleteBtn = document.querySelector('.delete');
-        deleteBtn.addEventListener('click', (e)=>{
-            const elementToRemove = e.target.parentNode.parentNode.parentNode.parentNode.parentNode.parentNode;
-            elementToRemove.remove();
-            // localStorage.removeItem('value')
-        })
+    //when deleted btn is clicked
+    const deleteBtns = document.querySelectorAll(".delete");
+    deleteBtns.forEach((deleteBtn) => {
+      deleteBtn.addEventListener("click", (e) => {
+        const elementToRemove = e.target.closest('.msg-content');
+        console.log(`should item be removed from dom`);
+        elementToRemove.remove();
+        
+        //add modal
+        activeModal.classList.add("active-modal");
 
+        //delete modal and element 
+        deleteModal.addEventListener('click', ()=>{
+            // elementToRemove.remove();
+            activeModal.classList.remove("active-modal");
+            localStorage.removeItem("value");
+        });
 
-        //clear the input
-        commentTxt.value = '';
-    }else{
-        console.log(`input a value`);
-    }
-    
-}
+        //cancel modal
+        cancelModal.addEventListener('click', ()=>{
+            activeModal.classList.remove("active-modal");
+        });
+      });
+    });
 
-
-
+    //clear the input
+    commentTxt.value = "";
+  } else {
+    console.log(`input a value`);
+  }
+};
 
 // ------------All Event Listeners----------------
 // when page load
 // window.addEventListener('load', pageLoads);
 
 // When send button is clicked
-sendBtn.addEventListener('click', clickedSend)
+sendBtn.addEventListener("click", clickedSend);
 
 
-
+//break down the code into smaller functions
