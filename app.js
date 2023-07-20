@@ -1,6 +1,3 @@
-/* TODO :
-1-populate the ui ON LOAD*/
-
 // ------------Selcting DOM Element---------------
 const mainContainer = document.querySelector(".content");
 const replyBtns = document.querySelectorAll(".reply");
@@ -43,9 +40,7 @@ const clickedSend = () => {
 
     //When all reply button is clicked
     editBtns.forEach((editBtn) => {
-      editBtn.addEventListener("click", ()=>{
-        console.log(`you tried to edit`);
-      });
+      editBtn.addEventListener("click", enableEditInput);
     });
 
     //When all delete button is clicked
@@ -59,6 +54,23 @@ const clickedSend = () => {
     console.log(`No value inputed`);
   }
 };
+
+//when edit button in clicked
+const enableEditInput = (e) =>{
+  //get the comment div
+  const getparentDiv = e.target.closest('.msg-content');
+  const getMsgValue = getparentDiv.querySelector('.comment-text').textContent;
+  const getCommentDiv = getparentDiv.querySelector('.comment-text-div');
+
+  // get width and height of comment div
+  const CommentDivHeight = getCommentDiv.getBoundingClientRect().height;
+  const CommentDivWidth = getCommentDiv.getBoundingClientRect().width;
+  console.log(getCommentDiv);
+  //create new text area tag
+  const textArea = document.createElement('textarea')
+  //add class and add width to it
+  getCommentDiv.innerHTML =`<textarea name="" id="" width ="${CommentDivWidth}" height="${CommentDivHeight}">${getMsgValue}</textarea>`
+}
 
 // when delete btn is clicked
 const enableDeleteModal = (e) => {
@@ -111,13 +123,13 @@ const createNewComment = (commentValue, userName) => {
                       ${commentValue}
                   </p>
               </div>
-          </div>
-          <div class="rating-sec">
-              <div class="plus"><img src="./images/icon-plus.svg" alt="+"></div>
-              <p class="rating">14</p>
-              <div class="minus"><img src="./images/icon-minus.svg" alt="-"></div>
-          </div>
-      </div>`;
+            </div>
+            <div class="rating-sec">
+                <div class="plus"><img src="./images/icon-plus.svg" alt="+"></div>
+                <p class="rating">14</p>
+                <div class="minus"><img src="./images/icon-minus.svg" alt="-"></div>
+            </div>
+        </div>`;
   mainContainer.appendChild(msgContentDiv);
 };
 
