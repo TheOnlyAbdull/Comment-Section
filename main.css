@@ -260,6 +260,12 @@ body{
     background: hsl(358, 79%, 66%);
 }
 
+/* Edit text area */
+.edit-text-area{
+    resize: none;
+    text-align: left;
+    padding: .1rem;
+}
 
 
 

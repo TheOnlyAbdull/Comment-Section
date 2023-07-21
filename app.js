@@ -65,11 +65,23 @@ const enableEditInput = (e) =>{
   // get width and height of comment div
   const CommentDivHeight = getCommentDiv.getBoundingClientRect().height;
   const CommentDivWidth = getCommentDiv.getBoundingClientRect().width;
-  console.log(getCommentDiv);
-  //create new text area tag
-  const textArea = document.createElement('textarea')
-  //add class and add width to it
-  getCommentDiv.innerHTML =`<textarea name="" id="" width ="${CommentDivWidth}" height="${CommentDivHeight}">${getMsgValue}</textarea>`
+  // console.log(getCommentDiv);
+  // console.log(CommentDivWidth);
+  // console.log(CommentDivHeight);
+
+  //create new text area tag and append
+  const textArea = document.createElement('textarea');
+  textArea.classList.add('.edit-text-area');
+  textArea.textContent = getMsgValue;
+  textArea.style.width = CommentDivWidth + "px";
+  textArea.style.height = CommentDivHeight + "px";
+  textArea.style.resize = `none`
+  // textArea.style.padding = `.2rem`
+  getCommentDiv.innerHTML = "";
+  getCommentDiv.appendChild(textArea);
+
+  
+ 
 }
 
 // when delete btn is clicked
