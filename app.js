@@ -26,28 +26,24 @@ const clickedSend = () => {
   if (commentValue) {
     //save comment to local storage
     // localStorage.setItem('value', JSON.stringify(commentValue));
-    console.log(`Value has been inputed`);
 
+    console.log(`Value has been inputed`);
     //get name
     const userName = getUserName();
-
     //create and append new comment
     createNewComment(commentValue, userName);
-
     //Selecting new element
     const editBtns = document.querySelectorAll('.edit');
     const deleteBtns = document.querySelectorAll(".delete");
 
-    //When all reply button is clicked
+    //When reply button is clicked
     editBtns.forEach((editBtn) => {
       editBtn.addEventListener("click", enableEditInput);
     });
-
     //When all delete button is clicked
     deleteBtns.forEach((deleteBtn) => {
       deleteBtn.addEventListener("click", enableDeleteModal);
     });
-
     //clear the input
     commentTxt.value = "";
   } else {
@@ -61,27 +57,34 @@ const enableEditInput = (e) =>{
   const getparentDiv = e.target.closest('.msg-content');
   const getMsgValue = getparentDiv.querySelector('.comment-text').textContent;
   const getCommentDiv = getparentDiv.querySelector('.comment-text-div');
-
   // get width and height of comment div
   const CommentDivHeight = getCommentDiv.getBoundingClientRect().height;
   const CommentDivWidth = getCommentDiv.getBoundingClientRect().width;
-  // console.log(getCommentDiv);
-  // console.log(CommentDivWidth);
-  // console.log(CommentDivHeight);
-
-  //create new text area tag and append
+  //create new text area and btn tag and append
   const textArea = document.createElement('textarea');
-  textArea.classList.add('.edit-text-area');
-  textArea.textContent = getMsgValue;
+  const updateBtn = document.createElement('button');
+  textArea.classList.add('edit-textarea');
+  updateBtn.classList.add('reply-btn', 'update-btn');
+  textArea.value = `${getMsgValue}`;
   textArea.style.width = CommentDivWidth + "px";
   textArea.style.height = CommentDivHeight + "px";
-  textArea.style.resize = `none`
-  // textArea.style.padding = `.2rem`
+  updateBtn.textContent = 'UPDATE';
+  console.log(getMsgValue)
+  //Remove and append new child
   getCommentDiv.innerHTML = "";
   getCommentDiv.appendChild(textArea);
+  getCommentDiv.appendChild(updateBtn);
 
-  
- 
+  //Update comment
+  document.querySelector('.update-btn').addEventListener('click', ()=>{
+    const textAreaValue = textArea.value;
+    getCommentDiv.innerHTML = '';
+    const newParagraph = document.createElement('p');
+    newParagraph.classList.add('comment-text');
+    newParagraph.textContent = textAreaValue;
+    getCommentDiv.appendChild(newParagraph);
+
+  })
 }
 
 // when delete btn is clicked
@@ -153,3 +156,5 @@ const createNewComment = (commentValue, userName) => {
 sendBtn.addEventListener("click", clickedSend);
 
 //break down the code into smaller functions
+
+

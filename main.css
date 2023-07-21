@@ -138,7 +138,7 @@ body{
 .reply-btn-container{
     order: 3;
 }
-.reply-btn-container .reply-btn{
+.reply-btn{
     padding: .8rem 1.5rem;
     background: hsl(238, 40%, 52%);
     border: 0;
@@ -261,12 +261,19 @@ body{
 }
 
 /* Edit text area */
-.edit-text-area{
+.edit-textarea{
     resize: none;
-    text-align: left;
-    padding: .1rem;
+    justify-content: left;
+    padding: 0;
+    height: 4.4rem; /*test width*/
+    width: 21rem;
+    /* font-size: 1rem; */
 }
-
+.update-btn{
+    display: block;
+    margin-left: auto;
+    margin-top: .8rem;
+}
 
 
 
@@ -338,6 +345,9 @@ body{
     }
     .modal-container{
         width: 90%;
+    }
+    .update-btn{
+        margin-top: .3rem;
     }
         
 }
