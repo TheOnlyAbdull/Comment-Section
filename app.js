@@ -21,14 +21,12 @@ const pageLoads = () => {
 const clickedSend = () => {
   //user comment msg
   const commentValue = sendMsg.value;
-
   //if a value is inputed
   if (commentValue) {
     //save comment to local storage
     // localStorage.setItem('value', JSON.stringify(commentValue));
 
-    console.log(`Value has been inputed`);
-    //get name
+    //get username
     const userName = getUserName();
     //create and append new comment
     createNewComment(commentValue, userName);
@@ -50,7 +48,6 @@ const clickedSend = () => {
     console.log(`No value inputed`);
   }
 };
-
 //when edit button in clicked
 const enableEditInput = (e) =>{
   //get the comment div
@@ -86,7 +83,6 @@ const enableEditInput = (e) =>{
 
   })
 }
-
 // when delete btn is clicked
 const enableDeleteModal = (e) => {
   const commentToRemove = e.target.closest(".msg-content");
@@ -106,7 +102,10 @@ const enableDeleteModal = (e) => {
     activeModal.classList.remove("active-modal");
   });
 };
-
+//When reply button button is clicked
+const clickedReply = () =>{
+  // 
+}
 //getting user details from local storage
 const getUserName = () => {
   //get user Name
@@ -154,7 +153,10 @@ const createNewComment = (commentValue, userName) => {
 
 // When send button is clicked
 sendBtn.addEventListener("click", clickedSend);
+//When reply button is clicked
+replyBtns.forEach(replyBtn => {
+  replyBtn.addEventListener('click', clickedReply);
+});
 
-//break down the code into smaller functions
 
 
