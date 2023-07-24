@@ -54,9 +54,11 @@ const enableEditInput = (e) =>{
   const getparentDiv = e.target.closest('.msg-content');
   const getMsgValue = getparentDiv.querySelector('.comment-text').textContent;
   const getCommentDiv = getparentDiv.querySelector('.comment-text-div');
+
   // get width and height of comment div
   const CommentDivHeight = getCommentDiv.getBoundingClientRect().height;
   const CommentDivWidth = getCommentDiv.getBoundingClientRect().width;
+
   //create new text area and btn tag and append
   const textArea = document.createElement('textarea');
   const updateBtn = document.createElement('button');
@@ -66,7 +68,7 @@ const enableEditInput = (e) =>{
   textArea.style.width = CommentDivWidth + "px";
   textArea.style.height = CommentDivHeight + "px";
   updateBtn.textContent = 'UPDATE';
-  console.log(getMsgValue)
+
   //Remove and append new child
   getCommentDiv.innerHTML = "";
   getCommentDiv.appendChild(textArea);
@@ -103,8 +105,9 @@ const enableDeleteModal = (e) => {
   });
 };
 //When reply button button is clicked
-const clickedReply = () =>{
-  // 
+const clickedReply = (e) =>{
+  //get parent div
+  const getparentDiv = e.target.closest('.msg-content');
 }
 //getting user details from local storage
 const getUserName = () => {

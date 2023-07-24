@@ -152,9 +152,9 @@ body{
 }
 
 /* ---------------POSTED-REPLY--------------- */
-.posted-reply-container{
+/* .posted-reply-container{
     width: 100%;
-}
+} */
 .msg-content.posted-reply{
     width:90% ;
     margin-left: auto;
@@ -265,9 +265,6 @@ body{
     resize: none;
     justify-content: left;
     padding: 0;
-    height: 4.4rem; /*test width*/
-    width: 21rem;
-    /* font-size: 1rem; */
 }
 .update-btn{
     display: block;
@@ -277,6 +274,12 @@ body{
 
 
 
+/* ---------------1300px--------------- */
+@media screen and (max-width:1300px) and (min-width:1000px) {
+    .content,.post{
+        width: 60%;
+    }
+}
 /* ---------------1000px--------------- */
 @media screen and (max-width:1000px) and (min-width:900px) {
     .content,.post{
@@ -304,9 +307,9 @@ body{
         padding: 1rem;
         position: relative;
     }
-    .posted-reply-container{
+    /* .posted-reply-container{
     border-left: 1px solid hsl(211, 10%, 45%);
-    }
+    } */
     /*  */
     .comment-sec{
         display: block;
