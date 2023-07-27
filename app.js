@@ -6,6 +6,8 @@ const commentTxt = document.getElementById("sendMsg");
 const activeModal = document.querySelector(".modal-overlay");
 const deleteModal = document.querySelector(".delete");
 const cancelModal = document.querySelector(".cancel");
+const ratings = document.querySelectorAll('.rating-sec');
+
 // ----------------All Functions------------------
 
 // Load page func
@@ -31,7 +33,7 @@ const clickedSend = () => {
     //create and append new comment
     createNewComment(commentValue, userName);
     //Selecting new element
-    const editBtns = document.querySelectorAll('.edit');
+    const editBtns = document.querySelectorAll(".edit");
     const deleteBtns = document.querySelectorAll(".delete");
 
     //When reply button is clicked
@@ -49,25 +51,25 @@ const clickedSend = () => {
   }
 };
 //when edit button in clicked
-const enableEditInput = (e) =>{
+const enableEditInput = (e) => {
   //get the comment div
-  const getparentDiv = e.target.closest('.msg-content');
-  const getMsgValue = getparentDiv.querySelector('.comment-text').textContent;
-  const getCommentDiv = getparentDiv.querySelector('.comment-text-div');
+  const getparentDiv = e.target.closest(".msg-content");
+  const getMsgValue = getparentDiv.querySelector(".comment-text").textContent;
+  const getCommentDiv = getparentDiv.querySelector(".comment-text-div");
 
   // get width and height of comment div
   const CommentDivHeight = getCommentDiv.getBoundingClientRect().height;
   const CommentDivWidth = getCommentDiv.getBoundingClientRect().width;
 
   //create new text area and btn tag and append
-  const textArea = document.createElement('textarea');
-  const updateBtn = document.createElement('button');
-  textArea.classList.add('edit-textarea');
-  updateBtn.classList.add('reply-btn', 'update-btn');
+  const textArea = document.createElement("textarea");
+  const updateBtn = document.createElement("button");
+  textArea.classList.add("edit-textarea");
+  updateBtn.classList.add("reply-btn", "update-btn");
   textArea.value = `${getMsgValue}`;
   textArea.style.width = CommentDivWidth + "px";
   textArea.style.height = CommentDivHeight + "px";
-  updateBtn.textContent = 'UPDATE';
+  updateBtn.textContent = "UPDATE";
 
   //Remove and append new child
   getCommentDiv.innerHTML = "";
@@ -75,18 +77,18 @@ const enableEditInput = (e) =>{
   getCommentDiv.appendChild(updateBtn);
 
   //Update comment
-  document.querySelector('.update-btn').addEventListener('click', ()=>{
+  document.querySelector(".update-btn").addEventListener("click", () => {
     const textAreaValue = textArea.value;
-    getCommentDiv.innerHTML = '';
-    const newParagraph = document.createElement('p');
-    newParagraph.classList.add('comment-text');
+    getCommentDiv.innerHTML = "";
+    const newParagraph = document.createElement("p");
+    newParagraph.classList.add("comment-text");
     newParagraph.textContent = textAreaValue;
     getCommentDiv.appendChild(newParagraph);
-
-  })
-}
+  });
+};
 // when delete btn is clicked
 const enableDeleteModal = (e) => {
+  // Element to delete;
   const commentToRemove = e.target.closest(".msg-content");
   //add modal
   activeModal.classList.add("active-modal");
@@ -94,9 +96,8 @@ const enableDeleteModal = (e) => {
   //delete modal and element
   deleteModal.addEventListener("click", () => {
     commentToRemove.remove();
-    // console.log(elementToRemove);
     activeModal.classList.remove("active-modal");
-    localStorage.removeItem("value");
+    // localStorage.removeItem("value");
   });
 
   //cancel modal
@@ -104,24 +105,79 @@ const enableDeleteModal = (e) => {
     activeModal.classList.remove("active-modal");
   });
 };
+//rating
+
 //When reply button button is clicked
-const clickedReply = (e) =>{
+const clickedReply = (e) => {
   //get parent div
-  const getparentDiv = e.target.closest('.content');
-  const clickedReplyDiv = e.target.closest('.msg-content');
+  const clickedReplyDiv = e.target.closest(".msg-content");
   //create new div
-  const replyCommentDiv = document.createElement('div');
-  replyCommentDiv.classList.add('reply-content', 'reply-input');
+  const replyCommentDiv = document.createElement("div");
+  replyCommentDiv.classList.add("reply-content", "reply-input");
   replyCommentDiv.innerHTML = `<div class="reply-text">
-  <textarea name="" id="" placeholder="@user-name:"></textarea>
-</div>
-<div class="reply-pic">
-  <img src="./images/avatars/image-maxblagun.png" alt="?">
-</div>
-<div class="reply-btn-container">
-  <button class="reply-btn">Reply</button>
-</div>`
-}
+    <textarea class="reply-textarea" id="" placeholder="@user-name:"></textarea>
+  </div>
+  <div class="reply-pic">
+    <img src="./images/avatars/image-maxblagun.png" alt="?">
+  </div>
+  <div class="reply-btn-container">
+    <button class="reply-btn">Reply</button>
+  </div>`;
+  // Append the div after the clicked reply div
+  clickedReplyDiv.insertAdjacentElement("afterend", replyCommentDiv);
+
+  //Send and Post reply
+  const replyMsg = document.querySelector(".reply-textarea");
+  const postReplyBtns = document.querySelectorAll(".reply-btn");
+  postReplyBtns.forEach((postReplyBtn) => {
+    postReplyBtn.addEventListener("click", (e) => {
+      const replyMsgValue = replyMsg.value;
+      if (replyMsgValue) {
+        //change div class and content
+        replyCommentDiv.classList.remove("reply-content", "reply-input");
+        replyCommentDiv.innerHTML = "";
+        replyCommentDiv.classList.add("msg-content", "posted-reply");
+        replyCommentDiv.innerHTML = `<div class="comment-sec">
+            <div class="text-sec">
+                <div class="profile">
+                    <div class="comment-pic"><img src="./images/avatars/image-amyrobson.png" alt="?"></div>
+                    <p class="user-name">Theabdull</p>
+                    <p class="user-tag">you</p>
+                    <p class="date-posted">1 month ago</p>
+                    <div class="del-ed">
+                        <div class="delete"><img src="./images/icon-delete.svg" alt="reply"><span class="reply-text">Delete</span></div>
+                        <div class="edit"><img src="./images/icon-edit.svg" alt="reply"><span class="reply-text">Edit</span></div>
+                    </div>
+                </div>
+                <div class="comment-text-div">
+                    <p class="comment-text"> 
+                        ${replyMsgValue}
+                    </p>
+                </div>
+            </div>
+            <div class="rating-sec">
+                <div class="plus"><img src="./images/icon-plus.svg" alt="+"></div>
+                <p class="rating">14</p>
+                <div class="minus"><img src="./images/icon-minus.svg" alt="-"></div>
+            </div>
+        </div>`;
+        //Selecting new element
+        const editBtns = document.querySelectorAll(".edit");
+        const deleteBtns = document.querySelectorAll(".delete");
+        //When reply button is clicked
+        editBtns.forEach((editBtn) => {
+          editBtn.addEventListener("click", enableEditInput);
+        });
+        //When all delete button is clicked
+        deleteBtns.forEach((deleteBtn) => {
+          deleteBtn.addEventListener("click", enableDeleteModal);
+        });
+      } else {
+        replyCommentDiv.remove();
+      }
+    });
+  });
+};
 //getting user details from local storage
 const getUserName = () => {
   //get user Name
@@ -163,6 +219,7 @@ const createNewComment = (commentValue, userName) => {
   mainContainer.appendChild(msgContentDiv);
 };
 
+
 // ------------All Event Listeners----------------
 // when page load
 // window.addEventListener('load', pageLoads);
@@ -170,9 +227,8 @@ const createNewComment = (commentValue, userName) => {
 // When send button is clicked
 sendBtn.addEventListener("click", clickedSend);
 //When reply button is clicked
-replyBtns.forEach(replyBtn => {
-  replyBtn.addEventListener('click', clickedReply);
+replyBtns.forEach((replyBtn) => {
+  replyBtn.addEventListener("click", clickedReply);
 });
-
-
-
+//When reply plus or minus is clicked
+// ratings.forEach(rateComment);
