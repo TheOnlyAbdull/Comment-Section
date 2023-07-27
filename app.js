@@ -107,7 +107,20 @@ const enableDeleteModal = (e) => {
 //When reply button button is clicked
 const clickedReply = (e) =>{
   //get parent div
-  const getparentDiv = e.target.closest('.msg-content');
+  const getparentDiv = e.target.closest('.content');
+  const clickedReplyDiv = e.target.closest('.msg-content');
+  //create new div
+  const replyCommentDiv = document.createElement('div');
+  replyCommentDiv.classList.add('reply-content', 'reply-input');
+  replyCommentDiv.innerHTML = `<div class="reply-text">
+  <textarea name="" id="" placeholder="@user-name:"></textarea>
+</div>
+<div class="reply-pic">
+  <img src="./images/avatars/image-maxblagun.png" alt="?">
+</div>
+<div class="reply-btn-container">
+  <button class="reply-btn">Reply</button>
+</div>`
 }
 //getting user details from local storage
 const getUserName = () => {

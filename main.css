@@ -117,6 +117,10 @@ body{
     text-align:start;
     justify-content: space-between;
 }
+.reply-input{
+    width: 90%;
+    margin-right: unset;
+}
 .reply-pic {
     width: 2.5rem;
     order: 1;
@@ -197,7 +201,7 @@ body{
     display: flex;
     justify-content: center;
     align-items: center;
-}
+}    
 .post{
     margin-bottom: 1rem;
     width: 50%;
@@ -298,6 +302,9 @@ body{
 /* ---------------700px--------------- */
 @media screen and (max-width:700px){
     .content, .post{
+        width: 95%;
+    }
+    .reply-input{
         width: 95%;
     }
     .msg-content.posted-reply{
