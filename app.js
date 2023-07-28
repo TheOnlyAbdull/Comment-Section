@@ -7,6 +7,8 @@ const activeModal = document.querySelector(".modal-overlay");
 const deleteModal = document.querySelector(".delete");
 const cancelModal = document.querySelector(".cancel");
 const ratings = document.querySelectorAll('.rating-sec');
+const plusBtns = document.querySelectorAll('.plus');
+const minusBtns = document.querySelectorAll('.minus');
 
 // ----------------All Functions------------------
 
@@ -54,8 +56,11 @@ const clickedSend = () => {
 const enableEditInput = (e) => {
   //get the comment div
   const getparentDiv = e.target.closest(".msg-content");
+  const replyingTo = getparentDiv.querySelector('.user-name').textContent;
   const getMsgValue = getparentDiv.querySelector(".comment-text").textContent;
+  const editedValue = removeFirstWord(getMsgValue);
   const getCommentDiv = getparentDiv.querySelector(".comment-text-div");
+  console.log(editedValue)
 
   // get width and height of comment div
   const CommentDivHeight = getCommentDiv.getBoundingClientRect().height;
@@ -66,7 +71,7 @@ const enableEditInput = (e) => {
   const updateBtn = document.createElement("button");
   textArea.classList.add("edit-textarea");
   updateBtn.classList.add("reply-btn", "update-btn");
-  textArea.value = `${getMsgValue}`;
+  textArea.value = `${editedValue}`;
   textArea.style.width = CommentDivWidth + "px";
   textArea.style.height = CommentDivHeight + "px";
   updateBtn.textContent = "UPDATE";
@@ -82,7 +87,7 @@ const enableEditInput = (e) => {
     getCommentDiv.innerHTML = "";
     const newParagraph = document.createElement("p");
     newParagraph.classList.add("comment-text");
-    newParagraph.textContent = textAreaValue;
+    newParagraph.innerHTML = `<span class='replying-name'>@${replyingTo}</span> ${textAreaValue}`
     getCommentDiv.appendChild(newParagraph);
   });
 };
@@ -105,17 +110,44 @@ const enableDeleteModal = (e) => {
     activeModal.classList.remove("active-modal");
   });
 };
-//rating
+//remove first word
+function removeFirstWord(sentence) {
+  const words = sentence.trim().split(/\s+/);
+  // Remove the first word (element) from the array
+  words.shift();
+  // Join the remaining words back into a sentence
+  const newSentence = words.join(' ');
+  console.log(newSentence)
+  return newSentence;
+}
+//positive rating
+const positiveRating = (e)=>{
+  const ratingSec = e.target.closest('.rating-sec');
+  const ratingValue = ratingSec.querySelector('.rating');
+  let rating = parseInt(ratingValue.textContent);
+  rating++;
+  ratingValue.textContent = rating;
+}
+
+//negative rating
+const negativeRating = (e)=>{
+  const ratingSec = e.target.closest('.rating-sec');
+  const ratingValue = ratingSec.querySelector('.rating');
+  let rating = parseInt(ratingValue.textContent);
+  rating--;
+  ratingValue.textContent = rating;
+}
 
 //When reply button button is clicked
 const clickedReply = (e) => {
   //get parent div
   const clickedReplyDiv = e.target.closest(".msg-content");
+  const replyingTo = clickedReplyDiv.querySelector('.user-name').textContent;
   //create new div
   const replyCommentDiv = document.createElement("div");
   replyCommentDiv.classList.add("reply-content", "reply-input");
   replyCommentDiv.innerHTML = `<div class="reply-text">
-    <textarea class="reply-textarea" id="" placeholder="@user-name:"></textarea>
+    <textarea class="reply-textarea" id="" placeholder="@${replyingTo}:"></textarea>
   </div>
   <div class="reply-pic">
     <img src="./images/avatars/image-maxblagun.png" alt="?">
@@ -151,7 +183,7 @@ const clickedReply = (e) => {
                 </div>
                 <div class="comment-text-div">
                     <p class="comment-text"> 
-                        ${replyMsgValue}
+                        <span class='replying-name'>@${replyingTo}</span> ${replyMsgValue}
                     </p>
                 </div>
             </div>
@@ -164,6 +196,17 @@ const clickedReply = (e) => {
         //Selecting new element
         const editBtns = document.querySelectorAll(".edit");
         const deleteBtns = document.querySelectorAll(".delete");
+        const plusBtns = document.querySelectorAll('.plus');
+        const minusBtns = document.querySelectorAll('.minus');
+        
+        //click plus
+        plusBtns.forEach(plusBtn => {
+          plusBtn.addEventListener('click', positiveRating);
+        });
+        //click minus
+        minusBtns.forEach(minusBtn =>{
+          minusBtn.addEventListener('click', negativeRating);
+        });
         //When reply button is clicked
         editBtns.forEach((editBtn) => {
           editBtn.addEventListener("click", enableEditInput);
@@ -178,13 +221,31 @@ const clickedReply = (e) => {
     });
   });
 };
+
 //getting user details from local storage
-const getUserName = () => {
-  //get user Name
-  const userName = "Abdullah";
+const getUserName = async() => {
+  try {
+    const response = await fetch('./data.json');
+    const data = await response.json();
+    const userName = data.currentUser.userName;
+    const userPic = data.currentUser.image.png;
+    return {userName,userPic}; 
+  } catch (error) {
+    console.error('Error fetching data:', error);
+    return null;
+  }
   // const userPic = localStorage.getItem(JSON.parse('userStoredPic'));
-  return userName;
+
+  ///how to export
+  const userData = await getUserName();
+  // if (userData) {
+  //   console.log(userData.userName); // Access userName from the returned object
+  //   console.log(userData.userPic);  // Access userPic from the returned object
+  // } else {
+  //   console.log('Failed to fetch user data.');
+  // }
 };
+
 // display Create new comment box and append
 const createNewComment = (commentValue, userName) => {
   //creating comment and add class
@@ -217,6 +278,19 @@ const createNewComment = (commentValue, userName) => {
             </div>
         </div>`;
   mainContainer.appendChild(msgContentDiv);
+
+  //select element
+  const plusBtns = document.querySelectorAll('.plus');
+  const minusBtns = document.querySelectorAll('.minus');
+  
+  //click plus
+  plusBtns.forEach(plusBtn => {
+    plusBtn.addEventListener('click', positiveRating);
+  });
+  //click minus
+  minusBtns.forEach(minusBtn =>{
+    minusBtn.addEventListener('click', negativeRating);
+  });
 };
 
 
@@ -230,5 +304,11 @@ sendBtn.addEventListener("click", clickedSend);
 replyBtns.forEach((replyBtn) => {
   replyBtn.addEventListener("click", clickedReply);
 });
-//When reply plus or minus is clicked
-// ratings.forEach(rateComment);
+//When reply minus is clicked
+plusBtns.forEach(plusBtn => {
+  plusBtn.addEventListener('click', positiveRating);
+});
+//When reply minus is clicked
+minusBtns.forEach(minusBtn =>{
+  minusBtn.addEventListener('click', negativeRating);
+});

@@ -39,7 +39,8 @@ body{
     display: flex;
 }
 .rating-sec{
-    padding:  .5rem;
+    padding:  .5rem ;
+    /* width: 3.8rem; */
     background: hsl(223, 19%, 93%);
     text-align: center;
     display: flex;
@@ -78,6 +79,7 @@ body{
     margin-right: .7rem;
     margin-left: .7rem;
     color:  hsl(212, 24%, 26%);
+    text-transform: lowercase;
 }
 .profile .date-posted{
     margin-left: .5rem;
@@ -154,7 +156,11 @@ body{
 .reply-btn-container .reply-btn:hover{
     background: hsl(239, 57%, 85%);
 }
-
+.replying-name{
+    font-weight: bold;
+    color: hsl(238, 40%, 52%);
+    text-transform: lowercase;
+}
 /* ---------------POSTED-REPLY--------------- */
 /* .posted-reply-container{
     width: 100%;
