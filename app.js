@@ -6,21 +6,11 @@ const commentTxt = document.getElementById("sendMsg");
 const activeModal = document.querySelector(".modal-overlay");
 const deleteModal = document.querySelector(".delete");
 const cancelModal = document.querySelector(".cancel");
-const ratings = document.querySelectorAll('.rating-sec');
-const plusBtns = document.querySelectorAll('.plus');
-const minusBtns = document.querySelectorAll('.minus');
+const ratings = document.querySelectorAll(".rating-sec");
+const plusBtns = document.querySelectorAll(".plus");
+const minusBtns = document.querySelectorAll(".minus");
 
 // ----------------All Functions------------------
-
-// Load page func
-const pageLoads = () => {
-  //display comment
-  const value = JSON.parse(localStorage.getItem("value"));
-  if (value) {
-    console.log(value);
-  }
-};
-
 //when Send button is clicked
 const clickedSend = () => {
   //user comment msg
@@ -30,8 +20,9 @@ const clickedSend = () => {
     //save comment to local storage
     // localStorage.setItem('value', JSON.stringify(commentValue));
 
-    //get username
+    //get info
     const userName = getUserName();
+
     //create and append new comment
     createNewComment(commentValue, userName);
     //Selecting new element
@@ -56,11 +47,10 @@ const clickedSend = () => {
 const enableEditInput = (e) => {
   //get the comment div
   const getparentDiv = e.target.closest(".msg-content");
-  const replyingTo = getparentDiv.querySelector('.user-name').textContent;
+  const replyingTo = getparentDiv.querySelector(".user-name").textContent;
   const getMsgValue = getparentDiv.querySelector(".comment-text").textContent;
   const editedValue = removeFirstWord(getMsgValue);
   const getCommentDiv = getparentDiv.querySelector(".comment-text-div");
-  console.log(editedValue)
 
   // get width and height of comment div
   const CommentDivHeight = getCommentDiv.getBoundingClientRect().height;
@@ -87,7 +77,13 @@ const enableEditInput = (e) => {
     getCommentDiv.innerHTML = "";
     const newParagraph = document.createElement("p");
     newParagraph.classList.add("comment-text");
-    newParagraph.innerHTML = `<span class='replying-name'>@${replyingTo}</span> ${textAreaValue}`
+      newParagraph.innerHTML = textAreaValue;
+    if (replyingTo == `undefined`) {
+      newParagraph.innerHTML = textAreaValue;
+    } else {
+      newParagraph.innerHTML = `<span class='replying-name'>@${replyingTo}</span> ${textAreaValue}`;
+      console.log('yes');
+    }
     getCommentDiv.appendChild(newParagraph);
   });
 };
@@ -116,33 +112,32 @@ function removeFirstWord(sentence) {
   // Remove the first word (element) from the array
   words.shift();
   // Join the remaining words back into a sentence
-  const newSentence = words.join(' ');
-  console.log(newSentence)
+  const newSentence = words.join(" ");
   return newSentence;
 }
 //positive rating
-const positiveRating = (e)=>{
-  const ratingSec = e.target.closest('.rating-sec');
-  const ratingValue = ratingSec.querySelector('.rating');
+const positiveRating = (e) => {
+  const ratingSec = e.target.closest(".rating-sec");
+  const ratingValue = ratingSec.querySelector(".rating");
   let rating = parseInt(ratingValue.textContent);
   rating++;
   ratingValue.textContent = rating;
-}
+};
 
 //negative rating
-const negativeRating = (e)=>{
-  const ratingSec = e.target.closest('.rating-sec');
-  const ratingValue = ratingSec.querySelector('.rating');
+const negativeRating = (e) => {
+  const ratingSec = e.target.closest(".rating-sec");
+  const ratingValue = ratingSec.querySelector(".rating");
   let rating = parseInt(ratingValue.textContent);
   rating--;
   ratingValue.textContent = rating;
-}
+};
 
 //When reply button button is clicked
 const clickedReply = (e) => {
   //get parent div
   const clickedReplyDiv = e.target.closest(".msg-content");
-  const replyingTo = clickedReplyDiv.querySelector('.user-name').textContent;
+  const replyingTo = clickedReplyDiv.querySelector(".user-name").textContent;
   //create new div
   const replyCommentDiv = document.createElement("div");
   replyCommentDiv.classList.add("reply-content", "reply-input");
@@ -175,7 +170,7 @@ const clickedReply = (e) => {
                     <div class="comment-pic"><img src="./images/avatars/image-amyrobson.png" alt="?"></div>
                     <p class="user-name">Theabdull</p>
                     <p class="user-tag">you</p>
-                    <p class="date-posted">1 month ago</p>
+                    <p class="date-posted">2 days ago</p>
                     <div class="del-ed">
                         <div class="delete"><img src="./images/icon-delete.svg" alt="reply"><span class="reply-text">Delete</span></div>
                         <div class="edit"><img src="./images/icon-edit.svg" alt="reply"><span class="reply-text">Edit</span></div>
@@ -196,16 +191,16 @@ const clickedReply = (e) => {
         //Selecting new element
         const editBtns = document.querySelectorAll(".edit");
         const deleteBtns = document.querySelectorAll(".delete");
-        const plusBtns = document.querySelectorAll('.plus');
-        const minusBtns = document.querySelectorAll('.minus');
-        
+        const plusBtns = document.querySelectorAll(".plus");
+        const minusBtns = document.querySelectorAll(".minus");
+
         //click plus
-        plusBtns.forEach(plusBtn => {
-          plusBtn.addEventListener('click', positiveRating);
+        plusBtns.forEach((plusBtn) => {
+          plusBtn.addEventListener("click", positiveRating);
         });
         //click minus
-        minusBtns.forEach(minusBtn =>{
-          minusBtn.addEventListener('click', negativeRating);
+        minusBtns.forEach((minusBtn) => {
+          minusBtn.addEventListener("click", negativeRating);
         });
         //When reply button is clicked
         editBtns.forEach((editBtn) => {
@@ -223,27 +218,9 @@ const clickedReply = (e) => {
 };
 
 //getting user details from local storage
-const getUserName = async() => {
-  try {
-    const response = await fetch('./data.json');
-    const data = await response.json();
-    const userName = data.currentUser.userName;
-    const userPic = data.currentUser.image.png;
-    return {userName,userPic}; 
-  } catch (error) {
-    console.error('Error fetching data:', error);
-    return null;
-  }
-  // const userPic = localStorage.getItem(JSON.parse('userStoredPic'));
-
-  ///how to export
-  const userData = await getUserName();
-  // if (userData) {
-  //   console.log(userData.userName); // Access userName from the returned object
-  //   console.log(userData.userPic);  // Access userPic from the returned object
-  // } else {
-  //   console.log('Failed to fetch user data.');
-  // }
+const getUserName = () => {
+  const userName = `Abdull`
+  return userName;
 };
 
 // display Create new comment box and append
@@ -256,7 +233,7 @@ const createNewComment = (commentValue, userName) => {
   msgContentDiv.innerHTML = `<div class="comment-sec">
           <div class="text-sec">
               <div class="profile">
-                  <div class="comment-pic"><img src="./images/avatars/image-maxblagun.png" alt="?"></div>
+                  <div class="comment-pic"><img src="./images/avatars/image-juliusomo.png" alt="?"></div>
                   <p class="user-name">${userName}</p>
                   <p class="user-tag">you</p>
                   <p class="date-posted">1 month ago</p>
@@ -280,24 +257,20 @@ const createNewComment = (commentValue, userName) => {
   mainContainer.appendChild(msgContentDiv);
 
   //select element
-  const plusBtns = document.querySelectorAll('.plus');
-  const minusBtns = document.querySelectorAll('.minus');
-  
+  const plusBtns = document.querySelectorAll(".plus");
+  const minusBtns = document.querySelectorAll(".minus");
+
   //click plus
-  plusBtns.forEach(plusBtn => {
-    plusBtn.addEventListener('click', positiveRating);
+  plusBtns.forEach((plusBtn) => {
+    plusBtn.addEventListener("click", positiveRating);
   });
   //click minus
-  minusBtns.forEach(minusBtn =>{
-    minusBtn.addEventListener('click', negativeRating);
+  minusBtns.forEach((minusBtn) => {
+    minusBtn.addEventListener("click", negativeRating);
   });
 };
 
-
 // ------------All Event Listeners----------------
-// when page load
-// window.addEventListener('load', pageLoads);
-
 // When send button is clicked
 sendBtn.addEventListener("click", clickedSend);
 //When reply button is clicked
@@ -305,10 +278,10 @@ replyBtns.forEach((replyBtn) => {
   replyBtn.addEventListener("click", clickedReply);
 });
 //When reply minus is clicked
-plusBtns.forEach(plusBtn => {
-  plusBtn.addEventListener('click', positiveRating);
+plusBtns.forEach((plusBtn) => {
+  plusBtn.addEventListener("click", positiveRating);
 });
 //When reply minus is clicked
-minusBtns.forEach(minusBtn =>{
-  minusBtn.addEventListener('click', negativeRating);
+minusBtns.forEach((minusBtn) => {
+  minusBtn.addEventListener("click", negativeRating);
 });
