@@ -9,25 +9,13 @@
 3. Usage
     - Feature 
     - Screenshots 
-4. Structure and Design
-    - HTML Structure
-    - CSS Styling
-5. Javascript Functionalities
-    - removing comment
-    - ########
-    - ########
-    - ########
-6. Conclusion
-
-
-
 ## 1. Introduction
-The comment section app is an interactive app, where users can post comment, delete comment, reply comment and also rate comment
+The comment section app is an interactive app, where users can post, delete, reply, edit, rate comment and posts seamlessly
 
 
 ## 2. Getting Started
 ### Prerequisites
-To use the ToDo List App, you need the following:
+To use the comment Comment section App, you need the following:
 - A web browser (e.g., Google Chrome, Mozilla Firefox)
 - Text editor or Integrated Development Environment (IDE)
 
@@ -37,17 +25,9 @@ To use the ToDo List App, you need the following:
 
 ## 3. Usage
 ### Feature
-- User are able no able to delete post or comment that are not written by them
-- 
+- User are able no able to post, delete and edit COMMENTS
+- users are able to post, delete, and edit REPLYS
+- Rate comments and reply
 
 ### Screenshot
--(screenshot)[./]
-
-## 4. Structure and design
-### HTML Structure
-### CSS Styling
-
-## 5. JavaScript Functionalities
-## Populate on Load
-The page structure is being populated on load with this function and previous states are being stored
--
+![screenshot](./images/screenshot.png)
